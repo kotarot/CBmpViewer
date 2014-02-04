@@ -1,14 +1,23 @@
+all: cbmpviewer colortest
+
 cbmpviewer: cbmpviewer.c
-	gcc -O2 -Wall -o cbmpviewer cbmpviewer.c
+	gcc -O2 -Wall -o cbmpviewer cbmpviewer.c -lm
 
 debug: cbmpviewer.c
-	gcc -DDEBUG -O2 -Wall -o cbmpviewer cbmpviewer.c
+	gcc -DDEBUG -O2 -Wall -o cbmpviewer cbmpviewer.c -lm
+
+colortest:
+	gcc -O2 -Wall -o colortest colortest.c -lm
 
 cbmpviewer.c: cbmpviewer.h
+colortest.c: cbmpviewer.h
 
 clean:
-	rm cbmpviewer
+	rm -f cbmpviewer colortest
 
 install:
 	install -m 755 cbmpviewer /usr/local/bin/
+	install -m 755 bmp.pl     /usr/local/bin/bmp
+	install -m 755 play.pl    /usr/local/bin/play
+
 
